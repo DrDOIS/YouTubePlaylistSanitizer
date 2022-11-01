@@ -63,9 +63,9 @@ async function init() {
             continue
         }
         // progress found -> remove it by clicking the trash button
-        var buttons = playlistItem.getElementsByClassName("style-scope yt-icon-button")
-        if (!buttons.length == 4){
-            log("Unexpected number of buttons. (" + buttons.length + " instead of 4)")
+        var buttons = playlistItem.getElementsByClassName("yt-spec-button-shape-next yt-spec-button-shape-next--text")
+        if (buttons.length != 1){
+            log("Unexpected number of buttons. (" + buttons.length + " instead of 1)")
             continue
         }
         var trashButton = buttons[0]
