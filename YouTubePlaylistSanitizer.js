@@ -66,7 +66,7 @@ async function init() {
         // progress found -> remove it by clicking on the three dots and select 'hide from mix'
         var menuButton = playlistItem.getElementsByClassName("style-scope yt-icon-button")[0]
         menuButton.click();
-        await sleep(5); // Wait 5ms for menu to open
+        await sleep(1); // Wait 5ms for menu to open
 
         var popupContainerList = document.getElementsByClassName("style-scope ytd-popup-container")
         if (popupContainerList.length != 3) {
@@ -74,7 +74,7 @@ async function init() {
         }
         var menu = popupContainerList[2]
         var menuEntries = menu.getElementsByClassName("style-scope ytd-menu-popup-renderer")
-        if (popupContainerList.length < 4) {
+        if (menuEntries.length < 4) {
             continue;
         }
         var hideFromMixEntry = menuEntries[3]
