@@ -62,14 +62,23 @@ async function init() {
             // progress not found -> keep it
             continue
         }
-        // progress found -> remove it by clicking the trash button
-        var buttons = playlistItem.getElementsByClassName("yt-spec-button-shape-next yt-spec-button-shape-next--text")
-        if (buttons.length != 1){
-            log("Unexpected number of buttons. (" + buttons.length + " instead of 1)")
-            continue
+
+        // progress found -> remove it by clicking on the three dots and select 'hide from mix'
+        var menuButton = playlistItem.getElementsByClassName("style-scope yt-icon-button")[0]
+        menuButton.click();
+        await sleep(5); // Wait 5ms for menu to open
+
+        var popupContainerList = document.getElementsByClassName("style-scope ytd-popup-container")
+        if (popupContainerList.length != 3) {
+            continue;
         }
-        var trashButton = buttons[0]
-        trashButton.click()
+        var menu = popupContainerList[2]
+        var menuEntries = menu.getElementsByClassName("style-scope ytd-menu-popup-renderer")
+        if (popupContainerList.length < 4) {
+            continue;
+        }
+        var hideFromMixEntry = menuEntries[3]
+        hideFromMixEntry.click()
     }
     log("Playlist sanitized")
 }
